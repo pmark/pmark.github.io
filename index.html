@@ -18,10 +18,12 @@
     
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     
     <meta name="theme-color" content="#fafafa">
     
-    <script src="js/bondathon.js" type="module"></script>
+    <script src="./js/app.js" type="module"></script>
+    <script src="./js/bondathon.js" type="module"></script>
 </head>
 
 <body>
@@ -30,15 +32,23 @@
     </blockquote>
     
     <div id="app">
+        <bond-random-button
+            id="random-button"
+            onclick="randomButtonWasClicked()"
+        ></bond-random-button>
+        
         <bond-loading-animation
+            id="bond-loading-animation"
+            style="opacity: 0; position:absolute;"
             color="#1FC81C"
             boxWidth="100%"
             moverHeightInPixels="82"
             moverSpeedPixelsPerSec="200"
             dotFrequencyMillis="750"
-        />
+        ></bond-loading-animation>
     </div>
-    
+</div>
+
 </body>
 
 </html>

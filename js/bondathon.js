@@ -148,3 +148,110 @@ class BondLoadingAnimation extends HTMLElement {
 }
 
 window.customElements.define("bond-loading-animation", BondLoadingAnimation);
+
+// 
+const btnTemplate = document.createElement('template');
+
+btnTemplate.innerHTML = /*html*/`
+<style>
+.wrapper {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(4);
+    position: relative;
+}
+
+#svg-button {
+    transform: rotate(90deg) scaleX(0.9);
+}
+
+#svg-button polygon {
+    fill: #1FC81C;
+}
+
+#svg-button-border {
+    transform: scaleX(1.25) scaleY(1.125) rotate(90deg);
+    position: absolute;
+    stroke: #6BE4F0;
+}
+
+.wrapper:active {
+    top: 1px;
+}
+
+.wrapper:hover #svg-button polygon {
+    fill: #6BE4F0;
+}
+
+.wrapper:active #svg-button polygon {
+    fill: #1FC81C;
+}
+
+.wrapper:hover #svg-button-border {
+    transform: scaleX(1.1) scaleY(0.99) rotate(90deg);
+}
+
+svg {
+    vector-effect: non-scaling-stroke;
+    shape-rendering: geometricPrecision;
+    stroke-dashoffset: 24px;
+    stroke-dasharray: 12px;
+    animation: stroke 2s linear infinite;
+}
+
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.btn-title {
+    font-family: vt323, courier;
+    color: #1F2806;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    position: absolute;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    line-height: 1rem;
+}
+</style>
+
+<a href="#" class="wrapper" id="the-button">
+<svg id="svg-button-border" height="102" width="102" >
+<polygon
+    points="50 3,100 28,100 75, 50 100,3 75,3 25" 
+ 
+    stroke-width="2"
+    fill="none" />
+</svg>
+
+<p class="btn-title">
+RANDOMIZE MOVIE
+</p>
+
+<svg id="svg-button" height="102" width="102">
+<polygon
+    points="50 3,100 28,100 75, 50 100,3 75,3 25" 
+    stroke-width="0" 
+/>
+</svg>
+
+</a>
+`;
+
+class BondRandomButton extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        const templateContent = btnTemplate.content;
+        shadow.appendChild(templateContent.cloneNode(true));
+    }
+}
+
+window.customElements.define("bond-random-button", BondRandomButton);
