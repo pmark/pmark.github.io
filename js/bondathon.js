@@ -63,6 +63,7 @@ class BondLoadingAnimation extends HTMLElement {
         `;
         
         this.observeResize();
+        this.resize();
     }
     
     resize(w) {
@@ -129,22 +130,20 @@ class BondLoadingAnimation extends HTMLElement {
             const twp = tw * 1.0;
             const shouldCreateFader = (t > twp) & (t < 1.0 - twp);
             
-            // const fp = (t - tw * 1.5) * 100;
-            // const shouldCreateFader = parseInt(fp, 10) % 20 === 0;
-            
             if (timeSinceLastFader > this._dotFrequencyMillis && shouldCreateFader) {
                 this._lastFaderAt = timestamp;
-                this.createFaderAt(t);
+                this.createDotAt(t);
             }
         }
     }
     
-    createFaderAt(t) {
+    createDotAt(t) {
         const div = document.createElement("div");
         div.className = "circle fader";
         const xPos = t * this._boxWidth;
         div.style.transform = `translateX(${xPos}px)`;
         this._container.appendChild(div);
+        setTimeout(function() { div.remove(); }, 1000);
     }
 }
 
